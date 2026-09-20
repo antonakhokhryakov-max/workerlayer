@@ -2,7 +2,7 @@
 
 Alpha desk for **WorkerLayer**. This GitHub repository is the **Vercel-import mirror**. Engineering source of truth is Origin (`anton-khokhryakov/tmp-ad13cedd27d9e252`).
 
-This checkout is a **control surface only**. Vercel must not run Workers, `startTask`, or Manifest exec. Those stay on the Mac mini host.
+This checkout is a **control surface only**. Vercel must not run Workers, `startTask`, or Manifest exec. Those stay on the Mac mini host (`WORKERLAYER_HOST_URL=https://khokhryakov.net`, named Cloudflare tunnel → `:43147`). Desk aliases `/api/tasks` and `/api/workers` proxy to the host `/api/...` routes.
 
 ## Vercel Import
 

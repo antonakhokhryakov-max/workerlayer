@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { isHostExecPath } from "./control-surface.ts";
+import { hostApiPath } from "./host.ts";
 import { hostUnconfiguredPayload, proxyToHost } from "./proxy.ts";
 
 describe("control surface invariant", () => {
@@ -60,5 +61,22 @@ describe("proxyToHost", () => {
     assert.equal(seen[0]?.headers.get("x-workerlayer-key-kind"), "identity-only");
     assert.equal(seen[0]?.headers.get("x-workerlayer-surface"), "vercel-desk");
     assert.deepEqual(await response.json(), { ok: true, ranOn: "mini" });
+  });
+
+  it("forwards the tasks alias to host /api/tasks", async () => {
+    const seen: string[] = [];
+
+    const response = await proxyToHost(new Request("http://desk.local/api/tasks"), hostApiPath("tasks"), {
+      env: { WORKERLAYER_HOST_URL: "https://mini.example" },
+      fetch: async (input) => {
+        const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+        seen.push(url);
+        return Response.json({ tasks: [{ goal: "hold notice" }] });
+      },
+    });
+
+    assert.equal(response.status, 200);
+    assert.deepEqual(seen, ["https://mini.example/api/tasks"]);
+    assert.deepEqual(await response.json(), { tasks: [{ goal: "hold notice" }] });
   });
 });
