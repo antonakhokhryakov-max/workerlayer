@@ -80,3 +80,7 @@ pnpm example
 Expect ALLOW `notes.read` → ALLOW `notes.write` → DENY `notes.export`, then environment destroyed and identity expired.
 
 `pnpm example` itself does not need OCR. The locked start chain still runs `pnpm fixtures` and `pnpm test`, so install `poppler`, `ffmpeg`, and `tesseract` first (see Exact start).
+
+## Stable public host URL
+
+`WORKERLAYER_HOST_URL=https://khokhryakov.net` (named Cloudflare tunnel → Mac mini :43147).

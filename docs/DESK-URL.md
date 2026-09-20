@@ -113,3 +113,7 @@ pnpm install && pnpm fixtures && pnpm test && pnpm dev
 If Vercel is slow after the GitHub click: a **paid reserved tunnel** (ngrok reserved domain or Cloudflare named tunnel) to this same `pnpm start` is better than flaky trycloudflare. Same host-side compute. Paste that hostname as `WORKERLAYER_HOST_URL` once Vercel exists, or use it as Fork Host until Vercel is connected.
 
 No new vertical. Echo is not the product. Stage 2 Grant selected unchanged.
+
+## Stable public host URL
+
+`WORKERLAYER_HOST_URL=https://khokhryakov.net` (named Cloudflare tunnel → Mac mini :43147).
