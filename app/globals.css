@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #efe6d4;
+  --paper-2: #f7f1e4;
+  --ink: #1c1812;
+  --muted: #6d6558;
+  --rule: #cbbfa8;
+  --brass: #8c6d2e;
+  --brass-2: #b0893d;
+  --ok: #2d6b3a;
+  --warn: #8a5a12;
+  --bad: #8f2d24;
+  --chip: #e6dcc8;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-brass: var(--brass);
+  --color-brass-2: var(--brass-2);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-chip: var(--chip);
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(176, 137, 61, 0.08), transparent 50%),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
