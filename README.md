@@ -8,7 +8,7 @@ This checkout is a **control surface only**. Vercel must not run Workers, `start
 
 1. Import [https://github.com/antonakhokhryakov-max/workerlayer](https://github.com/antonakhokhryakov-max/workerlayer).
 2. Framework preset: Next.js (`npm run build`).
-3. **Required env:** `WORKERLAYER_HOST_URL` = the Mac mini host base URL.
+3. **Required env:** `WORKERLAYER_HOST_URL` = `https://khokhryakov.net` (named Cloudflare tunnel to Mac mini :43147).
 4. Optional: `WORKERLAYER_IDENTITY_KEY` (identity-only), `WORKERLAYER_GRANT_ID`.
 
 Without `WORKERLAYER_HOST_URL`, the desk still builds and serves UI. Host calls return `503` and never execute locally.
