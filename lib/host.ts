@@ -55,6 +55,14 @@ export function hostBaseHref(host: URL): string {
   return copy.href;
 }
 
+/** Host compute routes live under `/api/...`. Desk aliases omit that prefix. */
+export function hostApiPath(path: string): string {
+  const clean = path.replace(/^\/+/, "").replace(/\/+$/, "");
+  if (!clean) return "api";
+  if (clean === "api" || clean.startsWith("api/")) return clean;
+  return `api/${clean}`;
+}
+
 export function buildHostTarget(host: URL, path: string, search = ""): URL {
   const clean = path.replace(/^\/+/, "");
   const target = new URL(clean, hostBaseHref(host));

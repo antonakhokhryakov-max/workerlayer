@@ -33,11 +33,20 @@ function asList(value: unknown): Record<string, unknown>[] {
 }
 
 function labelOf(item: Record<string, unknown>, fallback: string) {
-  for (const key of ["title", "name", "id", "path"]) {
+  for (const key of ["goal", "title", "name", "summary", "id", "path"]) {
     const value = item[key];
     if (typeof value === "string" && value.trim()) return value;
   }
   return fallback;
+}
+
+function hostFailureNote(entry: { response: Response; payload: HostPayload | null; text: string }): string | null {
+  if (entry.response.ok) return null;
+  const message = entry.payload?.message || entry.payload?.error;
+  if (typeof message === "string" && message.trim() && !/^\s*</.test(message) && message.length < 280) {
+    return message;
+  }
+  return `Host request failed (${entry.response.status})`;
 }
 
 function statusOf(item: Record<string, unknown>) {
@@ -81,14 +90,13 @@ export function Desk({ initialDesk }: DeskProps) {
   }, []);
 
   const refreshHost = useCallback(async () => {
-    const [workerRes, taskRes, manifestRes] = await Promise.all([
-      readHost("/api/host/workers"),
-      readHost("/api/host/tasks"),
-      readHost("/api/host/manifest"),
+    const [workerRes, taskRes] = await Promise.all([
+      readHost("/api/workers"),
+      readHost("/api/tasks"),
     ]);
 
-    const notes = [workerRes, taskRes, manifestRes]
-      .map((entry) => entry.payload?.message || entry.payload?.error)
+    const notes = [workerRes, taskRes]
+      .map(hostFailureNote)
       .filter((value, index, all): value is string => Boolean(value) && all.indexOf(value) === index);
 
     if (notes.length > 0) {
@@ -99,11 +107,7 @@ export function Desk({ initialDesk }: DeskProps) {
 
     setWorkers(asList(workerRes.payload?.workers ?? workerRes.payload));
     setTasks(asList(taskRes.payload?.tasks ?? taskRes.payload));
-    setManifest(
-      manifestRes.text && manifestRes.response.ok
-        ? manifestRes.text
-        : manifestRes.payload?.message || "Manifest is loaded from the Mac mini host, never executed here.",
-    );
+    setManifest("Manifest is not exposed by the host API. This desk never executes it.");
   }, [readHost]);
 
   useEffect(() => {
@@ -196,7 +200,11 @@ export function Desk({ initialDesk }: DeskProps) {
               event.preventDefault();
               void postToHost(
                 "/api/startTask",
-                { title: taskTitle, input: taskInput },
+                {
+                  title: taskTitle,
+                  input: taskInput,
+                  goal: [taskTitle, taskInput].filter((value) => value.trim()).join("\n\n"),
+                },
                 "startTask",
               );
             }}
