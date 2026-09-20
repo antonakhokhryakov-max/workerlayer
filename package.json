@@ -1,0 +1,47 @@
+{
+  "name": "aether",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WorkerLayer — the platform for deploying autonomous AI workers (Alpha)",
+  "scripts": {
+    "dev": "next dev -p 43147 --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start -p 43147 --hostname 127.0.0.1",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "aether": "tsx cli/aether.ts",
+    "example": "node scripts/run-python.mjs clients/python/example.py",
+    "example:custom": "node scripts/run-python.mjs clients/python/custom_tool.py",
+    "fixtures": "tsx fixtures/harbor-and-pine/generate.ts && tsx fixtures/lakeshore-market/generate.ts && tsx fixtures/two-company/generate.ts && tsx fixtures/ironwharf-diligence/generate.ts"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.8.0",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.3.0",
+    "exceljs": "^4.4.0",
+    "lucide-react": "^1.47.0",
+    "next": "16.3.5",
+    "pdf-lib": "^1.17.1",
+    "pptxgenjs": "^4.0.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "shadcn": "^4.21.0",
+    "tw-animate-css": "^1.4.0",
+    "unpdf": "^1.8.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.13",
+    "typescript": "^5",
+    "vitest": "^5.0.1"
+  },
+  "packageManager": "pnpm@10.33.3"
+}

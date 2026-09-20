@@ -1,0 +1,171 @@
+{
+  "goal": "Review the attached materials and research the companies using approved sources. Create a comparison spreadsheet covering business model, customers, funding, product capabilities and key differentiators. Then create a 10-slide market overview summarizing the landscape and your major findings. Cite sources and clearly flag information that could not be verified.",
+  "companies": [
+    {
+      "name": "Harbor & Pine Outdoor Co.",
+      "businessModel": "Wholesale to boutiques plus direct-to-consumer site",
+      "customers": "Independent garden shops, coastal hotels, homeowners",
+      "funding": "Bootstrapped; no institutional round disclosed",
+      "products": "Teak dining, powder-coated steel lounge, performance cushions",
+      "differentiators": "Retailer relationships on the US West Coast"
+    },
+    {
+      "name": "Northwind Lantern Co.",
+      "businessModel": "Specialty wholesale with a small online shop",
+      "customers": "Independent outfitters and two regional parks accounts",
+      "funding": "Owner-funded",
+      "products": "Oil lanterns, rechargeable camp lights, glass shades",
+      "differentiators": "Heritage lantern designs with modern batteries"
+    },
+    {
+      "name": "Cedar & Current",
+      "businessModel": "Direct-to-consumer plus a few design-trade accounts",
+      "customers": "Designers and second-home owners",
+      "funding": "$18 million Series B",
+      "products": "Modular teak decks and rail planters",
+      "differentiators": "Flat-pack outdoor rooms"
+    },
+    {
+      "name": "Saltwell Canvas",
+      "businessModel": "Made-to-order textiles sold through showrooms",
+      "customers": "Marine outfitters and hospitality groups",
+      "funding": "$4 million seed",
+      "products": "Marine-grade outdoor fabrics and custom covers",
+      "differentiators": "Salt-spray tested weaves"
+    },
+    {
+      "name": "Redwood Ember Grills",
+      "businessModel": "Premium hardware sold via specialty retailers",
+      "customers": "Outdoor kitchen dealers",
+      "funding": "$9 million Series A",
+      "products": "Wood-fired grills and cart inserts",
+      "differentiators": "Replaceable firebox liners"
+    },
+    {
+      "name": "Blue Heron Shade",
+      "businessModel": "Catalog wholesale",
+      "customers": "Patio stores and resort buyers",
+      "funding": null,
+      "products": "Cantilever umbrellas and shade sails",
+      "differentiators": "Wind-rated frames with replaceable canopies"
+    },
+    {
+      "name": "Quarry & Fern",
+      "businessModel": "Direct-to-consumer planters",
+      "customers": "Urban gardeners",
+      "funding": "Friends-and-family only; amount not stated",
+      "products": "Lightweight stone-look planters",
+      "differentiators": "Frost-rated shells under 20 pounds"
+    },
+    {
+      "name": "Tidepool Rec",
+      "businessModel": "D2C camping furniture",
+      "customers": "Car campers and van-life buyers",
+      "funding": "$2.5 million seed",
+      "products": "Folding tables, low chairs, kitchen boxes",
+      "differentiators": "Packs into a single tote"
+    },
+    {
+      "name": "Ironvine Perennials",
+      "businessModel": "Wholesale cushions to furniture brands",
+      "customers": "OEM furniture makers — named accounts not listed",
+      "funding": null,
+      "products": "Solution-dyed acrylic cushions",
+      "differentiators": "Custom sizes in 10 days"
+    },
+    {
+      "name": "Larkspur Fire Tables",
+      "businessModel": "Showroom plus e-commerce",
+      "customers": "Landscape contractors",
+      "funding": "$6 million Series A",
+      "products": "Propane and natural-gas fire tables",
+      "differentiators": "Hidden tank wells"
+    },
+    {
+      "name": "Mossline Shelters",
+      "businessModel": "Project-bid pergolas",
+      "customers": "Hill Country wineries and civic parks",
+      "funding": null,
+      "products": "Cedar and aluminum pergola kits",
+      "differentiators": "On-site install partners"
+    },
+    {
+      "name": "Windrow Hammocks",
+      "businessModel": "D2C with seasonal pop-ups",
+      "customers": "College towns and coastal gift shops",
+      "funding": "Crowdfunded; later round not disclosed",
+      "products": "Quilted hammocks and stands",
+      "differentiators": "Machine-washable slings"
+    },
+    {
+      "name": "Pebble & Dock",
+      "businessModel": "Coastal furniture wholesale",
+      "customers": "Marinas and inn owners",
+      "funding": "Bootstrapped",
+      "products": "Teak benches and dock boxes",
+      "differentiators": "Hardware rated for salt air"
+    },
+    {
+      "name": "Bramble Forge",
+      "businessModel": "Made-to-order steel furniture",
+      "customers": "Landscape architects",
+      "funding": "$1.2 million seed",
+      "products": "Welded steel benches and planters",
+      "differentiators": "Local-mill steel with visible joinery"
+    },
+    {
+      "name": "Silverpine Saunas",
+      "businessModel": "Direct-to-consumer barrel saunas",
+      "customers": "Homeowners in cold climates",
+      "funding": "$7 million Series A",
+      "products": "Outdoor barrel and cabin saunas",
+      "differentiators": null
+    },
+    {
+      "name": "Cinder Trail Ovens",
+      "businessModel": "Specialty retail plus D2C",
+      "customers": "Culinary hobbyists",
+      "funding": "Angel round; size redacted in the pack",
+      "products": "Portable wood-fired pizza ovens",
+      "differentiators": "Sub-15-minute heat-up claim (unverified here)"
+    },
+    {
+      "name": "Gull & Grain",
+      "businessModel": "Tabletop goods for outdoor dining",
+      "customers": "Home stores and wineries",
+      "funding": null,
+      "products": "Melamine dinnerware and enamelware",
+      "differentiators": "Restaurant-weight outdoor plates"
+    },
+    {
+      "name": "Hearthlane Heaters",
+      "businessModel": "Commercial and residential patio heat",
+      "customers": "Restaurants and homeowners",
+      "funding": "$11 million Series B",
+      "products": "Propane and electric patio heaters",
+      "differentiators": "Low-clearance heads for covered patios"
+    }
+  ],
+  "incomplete": [
+    "Blue Heron Shade",
+    "Ironvine Perennials",
+    "Mossline Shelters",
+    "Silverpine Saunas",
+    "Gull & Grain"
+  ],
+  "conflicts": [
+    {
+      "name": "Cedar & Current",
+      "field": "funding",
+      "values": [
+        "$18 million Series B",
+        "$12 million Series B"
+      ]
+    }
+  ],
+  "requiredArtifacts": [
+    "spreadsheet",
+    "presentation"
+  ],
+  "requestedSlides": 10
+}

@@ -1,0 +1,20 @@
+{
+  "insurer": "Cedarline Mutual",
+  "desk": "Embedded claims desk — synthetic vendor data",
+  "claims": [
+    {
+      "id": "CLM-1044",
+      "policyholder": "Mossline Shelters",
+      "loss": "Storm-damaged pergola kit at a civic park",
+      "reserve": 4200,
+      "status": "open"
+    },
+    {
+      "id": "CLM-1108",
+      "policyholder": "Blue Heron Shade",
+      "loss": "Warehouse leak on canopy stock",
+      "reserve": 1800,
+      "status": "open"
+    }
+  ]
+}

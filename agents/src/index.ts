@@ -1,0 +1,11 @@
+export { KnowledgeWorker } from "./knowledge-worker";
+export { ClaimsWorker } from "./claims-worker";
+export { ChiefOfStaffWorker, detectStaffScenario } from "./chief-of-staff";
+export { WorkingMemory, hasUsableSourceText } from "./memory";
+export { draftKnowledgeWorkPlan } from "./planning";
+export { TOOL_CATALOG } from "./tools/catalog";
+export { createModelProvider, type ModelProvider } from "./models/provider";
+export { DeterministicProvider } from "./models/deterministic";
+export { OpenAIProvider } from "./models/openai";
+export { heuristicAnalysis, spreadsheetFromAnalysis, extractCompanies, requestedSlideCount, alignOcrToKnownNames } from "./analysis";
+export { presentationFromAnalysis, documentFromAnalysis } from "./deliverables";

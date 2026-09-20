@@ -1,0 +1,8 @@
+{
+  "verticals": [
+    "./packages/vertical-echo",
+    "./packages/vertical-knowledge",
+    "./packages/vertical-claims",
+    "./packages/vertical-staff"
+  ]
+}
