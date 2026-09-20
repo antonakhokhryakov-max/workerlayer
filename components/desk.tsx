@@ -42,11 +42,16 @@ function labelOf(item: Record<string, unknown>, fallback: string) {
 
 function hostFailureNote(entry: { response: Response; payload: HostPayload | null; text: string }): string | null {
   if (entry.response.ok) return null;
-  const message = entry.payload?.message || entry.payload?.error;
-  if (typeof message === "string" && message.trim() && !/^\s*</.test(message) && message.length < 280) {
-    return message;
+  return actionPreview(entry.response.status, entry.payload?.message || entry.payload?.error || entry.text);
+}
+
+function actionPreview(status: number, text: string) {
+  const trimmed = text.trim();
+  if (!trimmed) return `Host request failed (${status})`;
+  if (/^</.test(trimmed)) {
+    return `Host request failed (${status}): no such host API route.`;
   }
-  return `Host request failed (${entry.response.status})`;
+  return trimmed.length > 280 ? `${status} ${trimmed.slice(0, 280)}` : `${status} ${trimmed}`;
 }
 
 function statusOf(item: Record<string, unknown>) {
@@ -141,7 +146,7 @@ export function Desk({ initialDesk }: DeskProps) {
         body: JSON.stringify(body),
       });
       const text = await response.text();
-      setLastAction(`${label}: ${response.status} ${text.slice(0, 280)}`);
+      setLastAction(`${label}: ${actionPreview(response.status, text)}`);
       await refreshHost();
     } finally {
       setBusy(null);
@@ -249,6 +254,7 @@ export function Desk({ initialDesk }: DeskProps) {
           <HostList
             empty="No tasks returned by the host."
             items={tasks.map((task, index) => ({
+              id: typeof task.id === "string" ? task.id : `task-${index}`,
               title: labelOf(task, `Task ${index + 1}`),
               status: statusOf(task),
             }))}
@@ -263,6 +269,7 @@ export function Desk({ initialDesk }: DeskProps) {
           <HostList
             empty="No workers returned by the host."
             items={workers.map((worker, index) => ({
+              id: typeof worker.id === "string" ? worker.id : `worker-${index}`,
               title: labelOf(worker, `Worker ${index + 1}`),
               status: statusOf(worker),
             }))}
@@ -347,7 +354,7 @@ function HostList({
   items,
   empty,
 }: {
-  items: { title: string; status: string }[];
+  items: { id: string; title: string; status: string }[];
   empty: string;
 }) {
   if (items.length === 0) {
@@ -357,7 +364,7 @@ function HostList({
   return (
     <ul className="mt-4 divide-y divide-rule border border-rule">
       {items.map((item) => (
-        <li key={`${item.title}-${item.status}`} className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
+        <li key={item.id} className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
           <span>{item.title}</span>
           <span className="font-mono text-[11px] text-muted uppercase">{item.status}</span>
         </li>
