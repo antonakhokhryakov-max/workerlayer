@@ -1,24 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import type { DeskInfo } from "@/lib/desk";
 
-type DeskInfo = {
-  product: string;
-  surface: string;
-  stage: {
-    id: number;
-    name: string;
-    grantMode: string;
-    keyKind: string;
-    sso: boolean;
-    computePicker: boolean;
-  };
-  grant: { id: string; mode: string; selected: boolean };
-  key: { kind: string; present: boolean; masked: string | null };
-  sso: boolean;
-  computePicker: boolean;
-  host: { configured: boolean; origin: string | null };
-  vercelMustNotRun: string[];
+type DeskProps = {
+  initialDesk: DeskInfo;
 };
 
 type HostPayload = {
@@ -62,8 +48,8 @@ function statusOf(item: Record<string, unknown>) {
   return "host";
 }
 
-export function Desk() {
-  const [desk, setDesk] = useState<DeskInfo | null>(null);
+export function Desk({ initialDesk }: DeskProps) {
+  const [desk, setDesk] = useState<DeskInfo>(initialDesk);
   const [deskError, setDeskError] = useState<string | null>(null);
   const [workers, setWorkers] = useState<Record<string, unknown>[]>([]);
   const [tasks, setTasks] = useState<Record<string, unknown>[]>([]);
@@ -138,7 +124,6 @@ export function Desk() {
   }, [loadDesk, refreshHost]);
 
   const hostTone = useMemo(() => {
-    if (!desk) return "warn";
     return desk.host.configured ? "ok" : "bad";
   }, [desk]);
 
@@ -163,7 +148,7 @@ export function Desk() {
     <div className="mx-auto flex min-h-full max-w-6xl flex-col px-5 py-5 sm:px-8 sm:py-7">
       <header className="flex flex-col gap-4 border-b border-rule pb-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono text-[11px] tracking-[0.22em] text-brass uppercase">
+          <p className="font-mono text-[11px] tracking-[0.14em] text-brass uppercase">
             Alpha desk · control surface
           </p>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight">WorkerLayer</h1>
@@ -172,8 +157,8 @@ export function Desk() {
             via <span className="font-mono text-ink">WORKERLAYER_HOST_URL</span>.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase">
-          <Chip tone={hostTone}>{desk?.host.configured ? "Host configured" : "Host unset"}</Chip>
+        <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] tracking-normal uppercase">
+          <Chip tone={hostTone}>{desk.host.configured ? "Host configured" : "Host unset"}</Chip>
           <Chip>Stage 2</Chip>
           <Chip>Grant selected</Chip>
           <Chip>No SSO</Chip>
@@ -188,9 +173,9 @@ export function Desk() {
         <section className="border border-rule bg-paper-2 p-4 lg:col-span-3">
           <SectionLabel>Grant</SectionLabel>
           <dl className="mt-3 space-y-3 text-sm">
-            <Row label="Status" value={desk?.grant.selected ? "Selected" : "—"} />
-            <Row label="Grant" value={desk?.grant.id ?? "—"} mono />
-            <Row label="Key" value={desk?.key.masked ?? "not set"} mono />
+            <Row label="Status" value={desk.grant.selected ? "Selected" : "—"} />
+            <Row label="Grant" value={desk.grant.id} mono />
+            <Row label="Key" value={desk.key.masked ?? "not set"} mono />
             <Row label="Key kind" value="Identity only" />
             <Row label="SSO" value="Not used" />
             <Row label="Compute" value="Mac mini host (fixed)" />
@@ -299,9 +284,9 @@ export function Desk() {
 
       <footer className="mt-6 flex flex-col gap-1 border-t border-rule pt-4 font-mono text-[11px] text-muted sm:flex-row sm:justify-between">
         <span>
-          Must not run on Vercel: {desk?.vercelMustNotRun.join(" · ") ?? "Workers · startTask · Manifest exec"}
+          Must not run on Vercel: {desk.vercelMustNotRun.join(" · ")}
         </span>
-        <span>{desk?.host.origin ?? "Set WORKERLAYER_HOST_URL on Vercel"}</span>
+        <span>{desk.host.origin ?? "Set WORKERLAYER_HOST_URL on Vercel"}</span>
       </footer>
     </div>
   );
@@ -326,7 +311,11 @@ function Chip({
     bad: "border-bad/30 bg-bad/10 text-bad",
     neutral: "border-rule bg-chip text-ink",
   };
-  return <span className={`border px-2 py-1 ${tones[tone]}`}>{children}</span>;
+  return (
+    <span className={`whitespace-nowrap border px-2 py-1 tracking-normal ${tones[tone]}`}>
+      {children}
+    </span>
+  );
 }
 
 function Row({
